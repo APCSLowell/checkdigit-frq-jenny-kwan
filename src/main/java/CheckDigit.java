@@ -7,7 +7,15 @@ public class CheckDigit
    */  
    public static int getCheck(int num) 
    {  
-     /* to be implemented in part (a) */
+     int count = 0;
+     for (int y = year1; y <= year2; y++)
+       {
+         if (isLeapYear(y))
+         {
+           count++;
+         }
+       }
+     return count;
    }
  
   /** Returns true if numWithCheckDigit is valid, or false    
@@ -18,7 +26,10 @@ public class CheckDigit
    */     
    public static boolean isValid(int numWithCheckDigit)    
    {      
-     /* to be implemented in part (b) */    
+     int startDay = firstDayOfYear(year);
+     int nthDay = dayOfYear(month, day, year);
+     int returnDay = (startDay + nthDay - 1) % 7;
+     return returnDay;
    }    
    
    /** Returns the number of digits in num. */    
