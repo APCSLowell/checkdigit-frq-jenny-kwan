@@ -1,19 +1,20 @@
 public class CheckDigit 
 {   
-  /** Returns the check digit for num. */
   public static int getCheck(int num) 
   {  
     int sum = 0;
     int numDigits = getNumberOfDigits(num);
+
     for (int i = 1; i <= numDigits; i++) 
     {
-      int digit = getDigit(num, i);
-      sum += digit * (numDigits - i + 1); // position from the right
+      int digit = getDigit(num, i); // i=1 is leftmost
+      int weight = numDigits - i + 1; // position from right
+      sum += digit * weight;
     }
+
     return sum % 10;
   }
 
-  /** Returns true if numWithCheckDigit is valid. */
   public static boolean isValid(int numWithCheckDigit)    
   {      
     int checkDigit = numWithCheckDigit % 10;
@@ -21,14 +22,12 @@ public class CheckDigit
     return getCheck(original) == checkDigit;
   }
 
-  /** Returns the number of digits in num. */
   public static int getNumberOfDigits(int num)    
   {      
     if (num < 10) return 1;
     return 1 + getNumberOfDigits(num / 10);    
   }
 
-  /** Returns the nth digit of num (n = 1 means leftmost digit). */
   public static int getDigit(int num, int n)    
   {      
     int pos = getNumberOfDigits(num) - n + 1;
